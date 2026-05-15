@@ -15,19 +15,21 @@ PLYGaussianRotations::usage = "PLYGaussianRotations[filename] returns an N x 4 N
 
 PLYGaussianGraphics::usage = "PLYGaussianGraphics[filename] returns a Graphics3D Point primitive representation of the Gaussian splats.";
 PLYGaussianImage::usage = "PLYGaussianImage[filename, res:32] returns an Image3D voxel representation of the Gaussian splats using a grid of size res.";
-PLYGaussianRender::usage = "PLYGaussianRender[filename, opts] returns an Image representation of the Gaussian splats rendered via WGPU.";
-SPZGaussianRender::usage = "SPZGaussianRender[filename, opts] returns an Image representation of the Gaussian splats rendered via WGPU.";
+PLYGaussianRender::usage = "PLYGaussianRender[filename, opts] returns an Image representation of the Gaussian splats rendered via WGPU. Supports standard options like ViewPoint, ViewCenter, and ViewAngle.";
+SPZGaussianRender::usage = "SPZGaussianRender[filename, opts] returns an Image representation of the Gaussian splats rendered via WGPU. Supports standard options like ViewPoint, ViewCenter, and ViewAngle.";
 PLYGaussianExplore::usage = "PLYGaussianExplore[filename] opens an interactive interface to explore the Gaussian splat model.";
 
 Options[PLYGaussianRender] = {
-  "Position" -> {0, 0, 3},
-  "Pitch" -> 0,
-  "Yaw" -> Pi,
-  "FOV" -> Pi/4,
+  ViewPoint -> {1.3, -2.4, 2.0},
+  ViewCenter -> {0, 0, 0},
+  ViewVertical -> {0, 0, 1},
+  ViewAngle -> 35 Degree,
   "Width" -> 512,
   "Height" -> 512,
   "DisplayMode" -> "Splat"
 };
+
+Options[SPZGaussianRender] = Options[PLYGaussianRender];
 
 Begin["`Private`"]
 
@@ -231,16 +233,35 @@ PLYGaussianImage[filename_String, res_Integer:32] := Module[
 ]
 
 PLYGaussianRender[filename_String, opts:OptionsPattern[]] := Module[
-  {path, result, data, pos, pitch, yaw, fov, width, height, mode, params},
+  {path, result, data, vp, vc, va, look, r, pos, pitch, yaw, fov, width, height, mode, params},
   loadLibrary[];
   If[!$libraryLoaded, Return[$Failed]];
   path = ExpandFileName[filename];
   If[!FileExistsQ[path], Return[$Failed]];
   
-  pos = OptionValue["Position"];
-  pitch = OptionValue["Pitch"];
-  yaw = OptionValue["Yaw"];
-  fov = OptionValue["FOV"];
+  vp = OptionValue[ViewPoint];
+  vc = OptionValue[ViewCenter];
+  va = OptionValue[ViewAngle];
+  
+  (* Handle symbolic ViewPoints *)
+  vp = Replace[vp, {
+    Front -> {0, -2.4, 0}, Back -> {0, 2.4, 0},
+    Left -> {-2.4, 0, 0}, Right -> {2.4, 0, 0},
+    Top -> {0, 0, 2.4}, Bottom -> {0, 0, -2.4},
+    Isometric -> {1.3, -2.4, 2.}
+  }];
+  
+  look = vc - vp;
+  r = Norm[look];
+  (* In the WGPU camera: Yaw=Pi is looking towards -Z. 
+     We map X, Y, Z such that Z is 'up' in Wolfram, but 'forward' in some WGPU cams.
+     However, my previous PLYGaussianExplore used Sin[theta] for 'up' (Y).
+  *)
+  pos = vp;
+  yaw = ArcTan[look[[1]], -look[[2]]];
+  pitch = ArcTan[Sqrt[look[[1]]^2 + look[[2]]^2], look[[3]]];
+  fov = va;
+
   width = OptionValue["Width"];
   height = OptionValue["Height"];
   mode = Replace[OptionValue["DisplayMode"], {"Splat" -> 0, "Ellipse" -> 1, "Point" -> 2, _ -> 0}];
@@ -262,15 +283,15 @@ PLYGaussianExplore[filename_String] := DynamicModule[
   {path = ExpandFileName[filename]},
   Manipulate[
     PLYGaussianRender[path, 
-      "Position" -> {r * Cos[phi] * Cos[theta], r * Sin[theta], r * Sin[phi] * Cos[theta]},
-      "Yaw" -> phi + Pi/2,
-      "Pitch" -> -theta,
+      ViewPoint -> {r * Cos[phi] * Cos[theta], r * Sin[phi] * Cos[theta], r * Sin[theta]},
+      ViewAngle -> va,
       "Width" -> 400, "Height" -> 400,
       "DisplayMode" -> mode
     ],
-    {{r, 3, "Distance"}, 0.1, 10},
-    {{phi, 0, "Azimuth"}, -Pi, Pi},
-    {{theta, 0, "Elevation"}, -Pi/2 + 0.1, Pi/2 - 0.1},
+    {{r, 3.5, "Distance"}, 0.1, 10},
+    {{phi, -Pi/2, "Azimuth"}, -Pi, Pi},
+    {{theta, 0.5, "Elevation"}, -Pi/2 + 0.1, Pi/2 - 0.1},
+    {{va, 35 Degree, "Angle"}, 1 Degree, 120 Degree},
     {{mode, "Splat", "Mode"}, {"Splat", "Ellipse", "Point"}},
     ControlPlacement -> Left
   ]
