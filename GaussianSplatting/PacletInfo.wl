@@ -16,7 +16,14 @@ PacletObject[
         "Root" -> "Kernel",
         "Context" -> {"ArnoudBuzing`GaussianSplatting`"},
         "Symbols" -> {
-          "ArnoudBuzing`GaussianSplatting`PLYGaussianCount"
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianCount",
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianPositions",
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianColors",
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianOpacities",
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianScales",
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianRotations",
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianGraphics",
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianImage"
         }
       },
       {"LibraryLink"},

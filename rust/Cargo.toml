@@ -9,6 +9,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wgpu-3dgs-core = "0.7"
+wolfram-library-link = "0.2.8"
 
 [[test]]
 name = "test_ply"
