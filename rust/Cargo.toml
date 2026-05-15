@@ -1,0 +1,15 @@
+[package]
+name = "gaussian_splatting"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "gaussian_splatting"
+crate-type = ["cdylib"]
+
+[dependencies]
+wgpu-3dgs-core = "0.7"
+
+[[test]]
+name = "test_ply"
+path = "tests/test_ply.rs"
