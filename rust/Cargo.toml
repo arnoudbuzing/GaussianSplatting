@@ -8,7 +8,11 @@ name = "gaussian_splatting"
 crate-type = ["cdylib"]
 
 [dependencies]
+glam = "0.32.1"
+pollster = "0.4.0"
+wgpu = "29.0.3"
 wgpu-3dgs-core = "0.7"
+wgpu-3dgs-viewer = "0.7.0"
 wolfram-library-link = "0.2.8"
 
 [[test]]

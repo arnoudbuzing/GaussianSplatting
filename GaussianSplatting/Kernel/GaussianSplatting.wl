@@ -15,6 +15,18 @@ PLYGaussianRotations::usage = "PLYGaussianRotations[filename] returns an N x 4 N
 
 PLYGaussianGraphics::usage = "PLYGaussianGraphics[filename] returns a Graphics3D Point primitive representation of the Gaussian splats.";
 PLYGaussianImage::usage = "PLYGaussianImage[filename, res:32] returns an Image3D voxel representation of the Gaussian splats using a grid of size res.";
+PLYGaussianRender::usage = "PLYGaussianRender[filename, opts] returns an Image representation of the Gaussian splats rendered via WGPU.";
+PLYGaussianExplore::usage = "PLYGaussianExplore[filename] opens an interactive interface to explore the Gaussian splat model.";
+
+Options[PLYGaussianRender] = {
+  "Position" -> {0, 0, 3},
+  "Pitch" -> 0,
+  "Yaw" -> Pi,
+  "FOV" -> Pi/4,
+  "Width" -> 512,
+  "Height" -> 512,
+  "DisplayMode" -> "Splat"
+};
 
 Begin["`Private`"]
 
@@ -81,6 +93,12 @@ loadLibrary[] := Module[{},
       "wl_ply_gaussian_rotations",
       {"UTF8String"},
       LibraryDataType[NumericArray, "Real32"]
+    ];
+    $PLYGaussianRenderFn = LibraryFunctionLoad[
+      $libraryPath,
+      "wl_ply_gaussian_render",
+      {"UTF8String", Integer, Integer, Real, Real, Real, Real, Real, Real, Integer},
+      LibraryDataType[NumericArray, "UnsignedInteger8"]
     ];
     $libraryLoaded = True,
     Message[PLYGaussianCount::load, $libraryPath];
@@ -210,6 +228,51 @@ PLYGaussianImage[filename_String, res_Integer:32] := Module[
   ]];
   Image3D[grid, ColorSpace -> "RGB"]
 ]
+
+PLYGaussianRender[filename_String, opts:OptionsPattern[]] := Module[
+  {path, result, data, pos, pitch, yaw, fov, width, height, mode, params},
+  loadLibrary[];
+  If[!$libraryLoaded, Return[$Failed]];
+  path = ExpandFileName[filename];
+  If[!FileExistsQ[path], Return[$Failed]];
+  
+  pos = OptionValue["Position"];
+  pitch = OptionValue["Pitch"];
+  yaw = OptionValue["Yaw"];
+  fov = OptionValue["FOV"];
+  width = OptionValue["Width"];
+  height = OptionValue["Height"];
+  mode = Replace[OptionValue["DisplayMode"], {"Splat" -> 0, "Ellipse" -> 1, "Point" -> 2, _ -> 0}];
+  
+  result = Quiet[Check[
+    $PLYGaussianRenderFn[path, width, height, pos[[1]], pos[[2]], pos[[3]], pitch, yaw, fov, mode], 
+    $Failed, 
+    LibraryFunction::rterr
+  ], {LibraryFunction::rterr}];
+  If[result === $Failed || Length[result] == 0, Return[$Failed]];
+  (* result is a flattened UnsignedInteger8 NumericArray of size width*height*4 (RGBA) *)
+  data = ArrayReshape[Normal[result], {height, width, 4}];
+  Image[data, "Byte", ColorSpace -> "RGB"]
+]
+
+PLYGaussianExplore[filename_String] := DynamicModule[
+  {path = ExpandFileName[filename]},
+  Manipulate[
+    PLYGaussianRender[path, 
+      "Position" -> {r * Cos[phi] * Cos[theta], r * Sin[theta], r * Sin[phi] * Cos[theta]},
+      "Yaw" -> phi + Pi/2,
+      "Pitch" -> -theta,
+      "Width" -> 400, "Height" -> 400,
+      "DisplayMode" -> mode
+    ],
+    {{r, 3, "Distance"}, 0.1, 10},
+    {{phi, 0, "Azimuth"}, -Pi, Pi},
+    {{theta, 0, "Elevation"}, -Pi/2 + 0.1, Pi/2 - 0.1},
+    {{mode, "Splat", "Mode"}, {"Splat", "Ellipse", "Point"}},
+    ControlPlacement -> Left
+  ]
+]
+
 
 End[] (* `Private` *)
 

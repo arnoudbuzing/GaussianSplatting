@@ -1,6 +1,8 @@
 use wolfram_library_link::{export, NumericArray};
 use wgpu_3dgs_core::PlyGaussians;
 
+mod render;
+
 #[export]
 pub fn wl_ply_gaussian_count(path: String) -> i64 {
     let file = match std::fs::File::open(&path) {
@@ -195,4 +197,14 @@ pub fn wl_ply_gaussian_opacities(path: String) -> NumericArray<f32> {
         }
     }
     NumericArray::<f32>::from_slice(&data)
+}
+
+#[export]
+pub fn wl_ply_gaussian_render(path: String, width: i64, height: i64, px: f64, py: f64, pz: f64, pitch: f64, yaw: f64, fov: f64, display_mode: i64) -> NumericArray<u8> {
+    let params = [px as f32, py as f32, pz as f32, pitch as f32, yaw as f32, fov as f32];
+    if let Some(arr) = render::render_ply_to_image(&path, width as u32, height as u32, &params, display_mode as u8) {
+        arr
+    } else {
+        NumericArray::<u8>::from_slice(&[])
+    }
 }

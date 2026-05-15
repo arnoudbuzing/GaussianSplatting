@@ -23,7 +23,9 @@ PacletObject[
           "ArnoudBuzing`GaussianSplatting`PLYGaussianScales",
           "ArnoudBuzing`GaussianSplatting`PLYGaussianRotations",
           "ArnoudBuzing`GaussianSplatting`PLYGaussianGraphics",
-          "ArnoudBuzing`GaussianSplatting`PLYGaussianImage"
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianImage",
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianRender",
+          "ArnoudBuzing`GaussianSplatting`PLYGaussianExplore"
         }
       },
       {"LibraryLink"},

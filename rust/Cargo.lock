@@ -155,6 +155,9 @@ name = "bitflags"
 version = "2.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c4512299f36f043ab09a583e57bceb5a5aab7a73db1805848e8fef3c9e8c78b3"
+dependencies = [
+ "bytemuck",
+]
 
 [[package]]
 name = "block-buffer"
@@ -533,7 +536,11 @@ dependencies = [
 name = "gaussian_splatting"
 version = "0.1.0"
 dependencies = [
+ "glam",
+ "pollster",
+ "wgpu",
  "wgpu-3dgs-core",
+ "wgpu-3dgs-viewer",
  "wolfram-library-link",
 ]
 
@@ -1308,6 +1315,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "pollster"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2f3a9f18d041e6d0e102a0a46750538147e5e8992d3b4873aaafee2520b00ce3"
+
+[[package]]
 name = "portable-atomic"
 version = "1.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2014,6 +2027,25 @@ dependencies = [
  "thiserror",
  "wesl",
  "wgpu",
+]
+
+[[package]]
+name = "wgpu-3dgs-viewer"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9717bcb98666f3222420b84293fc60d64c7c008008e861edf3906269b810f558"
+dependencies = [
+ "bitflags",
+ "bytemuck",
+ "glam",
+ "half",
+ "log",
+ "oneshot",
+ "paste",
+ "thiserror",
+ "wesl",
+ "wgpu",
+ "wgpu-3dgs-core",
 ]
 
 [[package]]
