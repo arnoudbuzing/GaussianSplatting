@@ -537,6 +537,7 @@ name = "gaussian_splatting"
 version = "0.1.0"
 dependencies = [
  "glam",
+ "once_cell",
  "pollster",
  "wgpu",
  "wgpu-3dgs-core",

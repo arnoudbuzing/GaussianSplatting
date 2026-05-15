@@ -1,19 +1,22 @@
-use std::sync::mpsc;
+use std::sync::{mpsc, Mutex};
+use std::collections::HashMap;
+use once_cell::sync::Lazy;
 use wgpu_3dgs_viewer::{Viewer, Camera, DefaultGaussianPod};
 use wgpu_3dgs_core::{PlyGaussians, Gaussians, ReadIterGaussian};
 use wolfram_library_link::NumericArray;
 use glam::{Vec3, Quat};
 
-pub fn render_ply_to_image(path: &str, width: u32, height: u32, camera_params: &[f32], display_mode: u8) -> Option<NumericArray<u8>> {
-    let file = std::fs::File::open(path).ok()?;
-    let mut reader = std::io::BufReader::new(file);
-    let ply = PlyGaussians::read_from(&mut reader).ok()?;
-    let gaussians = Gaussians::from(ply);
-    
-    pollster::block_on(render_async(gaussians, width, height, camera_params, display_mode))
+struct GlobalState {
+    device: wgpu::Device,
+    queue: wgpu::Queue,
+    viewers: HashMap<String, Viewer<DefaultGaussianPod>>,
 }
 
-async fn render_async(gaussians: Gaussians, width: u32, height: u32, camera_params: &[f32], display_mode: u8) -> Option<NumericArray<u8>> {
+static STATE: Lazy<Option<Mutex<GlobalState>>> = Lazy::new(|| {
+    pollster::block_on(init_state())
+});
+
+async fn init_state() -> Option<Mutex<GlobalState>> {
     let instance = wgpu::Instance::default();
     let adapter = instance
         .request_adapter(&wgpu::RequestAdapterOptions {
@@ -36,8 +39,31 @@ async fn render_async(gaussians: Gaussians, width: u32, height: u32, camera_para
         .await
         .ok()?;
 
+    Some(Mutex::new(GlobalState {
+        device,
+        queue,
+        viewers: HashMap::new(),
+    }))
+}
+
+pub fn render_ply_to_image(path: &str, width: u32, height: u32, camera_params: &[f32], display_mode: u8) -> Option<NumericArray<u8>> {
+    let state_lock = STATE.as_ref()?;
+    let mut state = state_lock.lock().ok()?;
+    
     let texture_format = wgpu::TextureFormat::Rgba8Unorm;
-    let mut viewer: Viewer<DefaultGaussianPod> = Viewer::new(&device, texture_format, &gaussians).ok()?;
+
+    // Check if viewer for this path exists, otherwise create it
+    if !state.viewers.contains_key(path) {
+        let file = std::fs::File::open(path).ok()?;
+        let mut reader = std::io::BufReader::new(file);
+        let ply = PlyGaussians::read_from(&mut reader).ok()?;
+        let gaussians = Gaussians::from(ply);
+        let viewer = Viewer::new(&state.device, texture_format, &gaussians).ok()?;
+        state.viewers.insert(path.to_string(), viewer);
+    }
+
+    let GlobalState { ref device, ref queue, ref mut viewers } = *state;
+    let viewer = viewers.get_mut(path)?;
 
     let mut camera = Camera::new(0.1..100.0, camera_params.get(5).cloned().unwrap_or(std::f32::consts::FRAC_PI_4));
     camera.pos = Vec3::new(
@@ -48,8 +74,8 @@ async fn render_async(gaussians: Gaussians, width: u32, height: u32, camera_para
     camera.pitch = camera_params.get(3).cloned().unwrap_or(0.0);
     camera.yaw = camera_params.get(4).cloned().unwrap_or(std::f32::consts::PI);
 
-    viewer.update_camera(&queue, &camera, glam::UVec2::new(width, height));
-    viewer.update_model_transform(&queue, Vec3::ZERO, Quat::IDENTITY, Vec3::ONE);
+    viewer.update_camera(queue, &camera, glam::UVec2::new(width, height));
+    viewer.update_model_transform(queue, Vec3::ZERO, Quat::IDENTITY, Vec3::ONE);
     let mode = match display_mode {
         1 => wgpu_3dgs_core::GaussianDisplayMode::Ellipse,
         2 => wgpu_3dgs_core::GaussianDisplayMode::Point,
@@ -57,7 +83,7 @@ async fn render_async(gaussians: Gaussians, width: u32, height: u32, camera_para
     };
 
     viewer.update_gaussian_transform(
-        &queue,
+        queue,
         1.0, 
         mode,
         wgpu_3dgs_core::GaussianShDegree::new(0).unwrap(), 
@@ -106,7 +132,6 @@ async fn render_async(gaussians: Gaussians, width: u32, height: u32, camera_para
     viewer.render(&mut encoder, &texture_view);
 
     let u32_size = std::mem::size_of::<u32>() as u32;
-    // bytes_per_row must be a multiple of 256 for CopyBuffer!
     let bytes_per_row = (u32_size * width + 255) & !255; 
     let output_buffer_size = (bytes_per_row * height) as wgpu::BufferAddress;
     
@@ -143,15 +168,14 @@ async fn render_async(gaussians: Gaussians, width: u32, height: u32, camera_para
     buffer_slice.map_async(wgpu::MapMode::Read, move |result| {
         tx.send(result).unwrap();
     });
-    device.poll(wgpu::PollType::wait_indefinitely());
+    let _ = device.poll(wgpu::PollType::wait_indefinitely());
     rx.recv().unwrap().unwrap();
 
     let data = buffer_slice.get_mapped_range();
     
-    // We need to un-pad the data if bytes_per_row != u32_size * width
     let mut unpadded_data = Vec::with_capacity((width * height * u32_size) as usize);
     let row_len = (width * u32_size) as usize;
-    for chunk in data.chunks(bytes_per_row as usize) {
+    for chunk in data.chunks(bytes_per_row as usize).take(height as usize).rev() {
         unpadded_data.extend_from_slice(&chunk[..row_len]);
     }
     
@@ -161,3 +185,4 @@ async fn render_async(gaussians: Gaussians, width: u32, height: u32, camera_para
 
     Some(num_array)
 }
+
