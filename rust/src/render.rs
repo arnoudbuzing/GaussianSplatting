@@ -2,7 +2,7 @@ use std::sync::{mpsc, Mutex};
 use std::collections::HashMap;
 use once_cell::sync::Lazy;
 use wgpu_3dgs_viewer::{Viewer, Camera, DefaultGaussianPod};
-use wgpu_3dgs_core::{PlyGaussians, Gaussians, ReadIterGaussian};
+use wgpu_3dgs_core::{PlyGaussians, SpzGaussians, Gaussians, ReadIterGaussian};
 use wolfram_library_link::NumericArray;
 use glam::{Vec3, Quat};
 
@@ -32,7 +32,7 @@ async fn init_state() -> Option<Mutex<GlobalState>> {
             &wgpu::DeviceDescriptor {
                 label: None,
                 required_features: wgpu::Features::empty(),
-                required_limits: wgpu::Limits::default(),
+                required_limits: adapter.limits(),
                 ..Default::default()
             }
         )
@@ -46,7 +46,7 @@ async fn init_state() -> Option<Mutex<GlobalState>> {
     }))
 }
 
-pub fn render_ply_to_image(path: &str, width: u32, height: u32, camera_params: &[f32], display_mode: u8) -> Option<NumericArray<u8>> {
+pub fn render_gaussian_to_image(path: &str, width: u32, height: u32, camera_params: &[f32], display_mode: u8) -> Option<NumericArray<u8>> {
     let state_lock = STATE.as_ref()?;
     let mut state = state_lock.lock().ok()?;
     
@@ -56,8 +56,15 @@ pub fn render_ply_to_image(path: &str, width: u32, height: u32, camera_params: &
     if !state.viewers.contains_key(path) {
         let file = std::fs::File::open(path).ok()?;
         let mut reader = std::io::BufReader::new(file);
-        let ply = PlyGaussians::read_from(&mut reader).ok()?;
-        let gaussians = Gaussians::from(ply);
+        
+        let gaussians = if path.to_lowercase().ends_with(".spz") {
+            let spz = SpzGaussians::read_from(&mut reader).ok()?;
+            Gaussians::from(spz)
+        } else {
+            let ply = PlyGaussians::read_from(&mut reader).ok()?;
+            Gaussians::from(ply)
+        };
+
         let viewer = Viewer::new(&state.device, texture_format, &gaussians).ok()?;
         state.viewers.insert(path.to_string(), viewer);
     }
@@ -175,7 +182,7 @@ pub fn render_ply_to_image(path: &str, width: u32, height: u32, camera_params: &
     
     let mut unpadded_data = Vec::with_capacity((width * height * u32_size) as usize);
     let row_len = (width * u32_size) as usize;
-    for chunk in data.chunks(bytes_per_row as usize).take(height as usize).rev() {
+    for chunk in data.chunks(bytes_per_row as usize).take(height as usize) {
         unpadded_data.extend_from_slice(&chunk[..row_len]);
     }
     

@@ -10,470 +10,51 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[    886180,      14973]
-NotebookOptionsPosition[    879061,      14846]
-NotebookOutlinePosition[    879452,      14862]
-CellTagsIndexPosition[    879409,      14859]
+NotebookDataLength[    876917,      14737]
+NotebookOptionsPosition[    870017,      14614]
+NotebookOutlinePosition[    870408,      14630]
+CellTagsIndexPosition[    870365,      14627]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
-Cell[BoxData["$Version"], "Input",
- CellChangeTimes->{{3.9878536304342422`*^9, 3.987853631383128*^9}},
- CellLabel->"In[59]:=",ExpressionUUID->"7e0976d4-7055-48bb-9291-574bee90732f"],
+Cell["Gaussian Splatting", "Title",
+ CellChangeTimes->{{3.987864079111475*^9, 
+  3.987864104727977*^9}},ExpressionUUID->"0a0e4a5a-49db-4c85-8a4e-\
+1e58e1d2e19c"],
 
-Cell[BoxData["\<\"15.0.0 for Mac OS X ARM (64-bit) (May 13, 2026)\"\>"], \
-"Output",
- CellChangeTimes->{3.987853631753079*^9},
- CellLabel->"Out[59]=",ExpressionUUID->"7d1e812b-cd4e-4315-8300-3520f3719f04"]
-}, Open  ]],
+Cell[BoxData["Quit"], "Input",
+ CellChangeTimes->{{3.987864045674958*^9, 3.987864046129992*^9}},
+ CellLabel->"In[10]:=",ExpressionUUID->"0e906943-4bbc-4daa-9c79-0dfd80db308d"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"PacletDirectoryLoad", 
-  "[", "\"\</Users/arnoudb/github/GaussianSplatting\>\"", "]"}]], "Input",
- CellChangeTimes->{{3.987853632287797*^9, 3.987853645715454*^9}},
- CellLabel->"In[60]:=",ExpressionUUID->"8456c7c4-8828-400b-88f0-ac456a0e57f5"],
+ RowBox[{
+  RowBox[{
+  "PacletDirectoryLoad", 
+   "[", "\"\</Users/arnoudb/github/GaussianSplatting\>\"", "]"}], 
+  ";"}]], "Code",
+ CellChangeTimes->{
+  3.987864043340433*^9},ExpressionUUID->"eade51e2-199c-4e19-be64-\
+dba4aea92136"],
 
 Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"\<\"/Users/arnoudb/github/PhysicsModelLink\"\>", 
-   ",", "\<\"/Users/arnoudb/github/GaussianSplatting\"\>"}], "}"}]], "Output",\
-
- CellChangeTimes->{3.9878536484438953`*^9},
- CellLabel->"Out[60]=",ExpressionUUID->"e1f34b0c-048a-4b4f-a62d-76843126fbe0"]
+ RowBox[{"{", "\<\"/Users/arnoudb/github/GaussianSplatting\"\>", 
+  "}"}]], "Output",
+ CellChangeTimes->{3.987856464113411*^9, 3.987856692957492*^9, 
+  3.987858000435863*^9, 3.9878581309607267`*^9, 3.987858527454954*^9, 
+  3.987858647947784*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"2d2d83e6-6c5b-4ad4-8084-577d9bce8485"]
 }, Open  ]],
 
 Cell[BoxData[
  RowBox[{"Needs", "[", "\"\<ArnoudBuzing`GaussianSplatting`\>\"", 
-  "]"}]], "Input",
- CellChangeTimes->{{3.98785365171352*^9, 3.9878536626135883`*^9}},
- CellLabel->"In[61]:=",ExpressionUUID->"836c06f5-ef40-4a57-86d1-ed4d28216512"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"?", "ArnoudBuzing`GaussianSplatting`*"}]], "Input",
- CellChangeTimes->{{3.987853664533195*^9, 3.9878536714003563`*^9}},
- CellLabel->"In[62]:=",ExpressionUUID->"6a57de5b-3701-40d1-b197-83d258dbc2aa"],
-
-Cell[BoxData[
- InterpretationBox[
-  StyleBox[
-   FrameBox[
-    DynamicModuleBox[{System`InformationDump`open$$ = False, 
-     System`InformationDump`mouseOver$$ = False}, 
-     PaneSelectorBox[{True->
-      TagBox[GridBox[{
-         {
-          ItemBox[
-           PaneBox[
-            StyleBox[
-             TagBox[
-              TooltipBox[
-               StyleBox["\<\" Symbol\"\>", "InformationRowLabel",
-                StripOnInput->False],
-               "\"Symbol\"",
-               TooltipStyle->"TextStyling"],
-              Annotation[#, "Symbol", "Tooltip"]& ], "InformationTitleText",
-             StripOnInput->False,
-             BaseStyle -> None],
-            FrameMargins->{{4, 0}, {-1, 1}}],
-           BaseStyle->"InformationTitleBackground",
-           StripOnInput->False], 
-          ItemBox["\<\"\"\>",
-           BaseStyle->"InformationTitleBackground",
-           StripOnInput->False]},
-         {
-          ItemBox[
-           PaneBox[
-            
-            StyleBox["\<\"PLYGaussianCount[filename] loads a 3D Gaussian \
-Splatting PLY file and returns the number of Gaussians it contains.\"\>", 
-             "InformationUsageText",
-             StripOnInput->False,
-             LineSpacing->{1.5, 1.5, 3.}],
-            FrameMargins->{{10, 10}, {8, 10}}],
-           BaseStyle->"InformationUsageSubtitleBackground",
-           StripOnInput->False], 
-          ItemBox["\<\"\"\>",
-           BaseStyle->"InformationUsageSubtitleBackground",
-           StripOnInput->False]},
-         {
-          PaneBox[
-           TagBox[GridBox[{
-              {
-               StyleBox[
-                TagBox[
-                 TooltipBox[
-                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
-                   StripOnInput->False],
-                  "\"Definitions\"",
-                  TooltipStyle->"TextStyling"],
-                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
-                StripOnInput->False]},
-              {
-               TemplateBox[{"\"\[ThinSpace]\"", 
-                 GridBox[{{
-                    RowBox[{
-                    
-                    RowBox[{
-                    "PLYGaussianCount", "[", 
-                    "ArnoudBuzing`GaussianSplatting`Private`filename_String", 
-                    "]"}], ":=", 
-                    RowBox[{"Module", "[", 
-                    RowBox[{
-                    RowBox[{"{", 
-                    
-                    RowBox[{"ArnoudBuzing`GaussianSplatting`Private`path", 
-                    ",", "ArnoudBuzing`GaussianSplatting`Private`result"}], 
-                    "}"}], ",", 
-                    RowBox[{
-                    
-                    RowBox[{
-                    "ArnoudBuzing`GaussianSplatting`Private`loadLibrary", "[",
-                     "]"}], ";", 
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    
-                    RowBox[{"!", 
-                    "ArnoudBuzing`GaussianSplatting`Private`$libraryLoaded"}],
-                     ",", 
-                    RowBox[{"Return", "[", "$Failed", "]"}]}], "]"}], ";", 
-                    
-                    RowBox[{"ArnoudBuzing`GaussianSplatting`Private`path", 
-                    "=", 
-                    
-                    RowBox[{"ExpandFileName", "[", 
-                    "ArnoudBuzing`GaussianSplatting`Private`filename", 
-                    "]"}]}], ";", 
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{"!", 
-                    
-                    RowBox[{"FileExistsQ", "[", 
-                    "ArnoudBuzing`GaussianSplatting`Private`path", "]"}]}], 
-                    ",", 
-                    RowBox[{
-                    RowBox[{"Message", "[", 
-                    RowBox[{
-                    StyleBox[
-                    RowBox[{"PLYGaussianCount", "::", "badfile"}], 
-                    "MessageName"], ",", 
-                    "ArnoudBuzing`GaussianSplatting`Private`path"}], "]"}], 
-                    ";", 
-                    RowBox[{"Return", "[", "$Failed", "]"}]}]}], "]"}], ";", 
-                    
-                    RowBox[{"ArnoudBuzing`GaussianSplatting`Private`result", 
-                    "=", 
-                    RowBox[{"Quiet", "[", 
-                    RowBox[{
-                    RowBox[{"Check", "[", 
-                    RowBox[{
-                    
-                    RowBox[{
-                    "ArnoudBuzing`GaussianSplatting`Private`$\
-PLYGaussianCountFn", "[", "ArnoudBuzing`GaussianSplatting`Private`path", 
-                    "]"}], ",", "$Failed", ",", 
-                    StyleBox[
-                    RowBox[{"LibraryFunction", "::", "rterr"}], 
-                    "MessageName"]}], "]"}], ",", 
-                    RowBox[{"{", 
-                    StyleBox[
-                    RowBox[{"LibraryFunction", "::", "rterr"}], 
-                    "MessageName"], "}"}]}], "]"}]}], ";", 
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{
-                    
-                    RowBox[{"ArnoudBuzing`GaussianSplatting`Private`result", 
-                    "===", "$Failed"}], "||", 
-                    RowBox[{"(", 
-                    RowBox[{
-                    
-                    RowBox[{"IntegerQ", "[", 
-                    "ArnoudBuzing`GaussianSplatting`Private`result", "]"}], 
-                    "&&", 
-                    
-                    RowBox[{"ArnoudBuzing`GaussianSplatting`Private`result", 
-                    "<", "0"}]}], ")"}]}], ",", 
-                    RowBox[{
-                    RowBox[{"Message", "[", 
-                    RowBox[{
-                    StyleBox[
-                    RowBox[{"PLYGaussianCount", "::", "err"}], "MessageName"],
-                     ",", "ArnoudBuzing`GaussianSplatting`Private`path"}], 
-                    "]"}], ";", "$Failed"}], ",", 
-                    "ArnoudBuzing`GaussianSplatting`Private`result"}], 
-                    "]"}]}]}], "]"}]}]}, {" "}}, 
-                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
-                  DefaultBaseStyle -> "Column", 
-                  GridBoxItemSize -> {
-                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
-                "RowDefault"]}
-             },
-             DefaultBaseStyle->"Column",
-             GridBoxAlignment->{"Columns" -> {{Left}}},
-             
-             GridBoxItemSize->{
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
-            "Column"],
-           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
-         {
-          PaneBox[GridBox[{
-             {
-              
-              DynamicModuleBox[{System`InformationDump`open$$ = {
-               False, False, False, False, False, False}}, 
-               StyleBox[GridBox[{
-                  {
-                   TagBox[
-                    TooltipBox[
-                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
-                    StripOnInput->False],
-                    "\"FullName\"",
-                    TooltipStyle->"TextStyling"],
-                    
-                    Annotation[#, "FullName", 
-                    "Tooltip"]& ], \
-"\<\"ArnoudBuzing`GaussianSplatting`PLYGaussianCount\"\>"}
-                 },
-                 AutoDelete->False,
-                 GridBoxAlignment->{"Columns" -> {Right, Left}},
-                 GridBoxDividers->None,
-                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
-                 GridBoxSpacings->{"Columns" -> {
-                    Offset[0.27999999999999997`], {
-                    Offset[0.5599999999999999]}, 
-                    Offset[0.27999999999999997`]}, "Rows" -> {
-                    Offset[0.2], {
-                    Offset[0.8]}, 
-                    Offset[0.2]}}], "DialogStyle",
-                StripOnInput->False],
-               DynamicModuleValues:>{}]}
-            },
-            DefaultBaseStyle->"Column",
-            GridBoxAlignment->{"Columns" -> {{Left}}},
-            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
-            
-            GridBoxItemSize->{
-             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.5599999999999999]}, 
-                Offset[0.27999999999999997`]}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[3.6]}, 
-                Offset[0.2]}}],
-           FrameMargins->{{6, 6}, {6, 3}}], ""},
-         {
-          ItemBox[
-           TagBox[
-            ButtonBox[
-             PaneSelectorBox[{False->
-              
-              DynamicBox[FEPrivate`FrontEndResource[
-               "FEBitmaps", "UpPointerOpener"]], True->
-              
-              DynamicBox[FEPrivate`FrontEndResource[
-               "FEBitmaps", "UpPointerOpenerHot"]]}, Dynamic[
-              System`InformationDump`mouseOver$$]],
-             Alignment->Left,
-             Appearance->{"Default" -> None},
-             
-             ButtonFunction:>FEPrivate`Set[
-              System`InformationDump`open$$, False],
-             Evaluator->Automatic,
-             FrameMargins->{{9, 0}, {0, 0}},
-             ImageMargins->0,
-             ImageSize->Full,
-             Method->"Preemptive"],
-            
-            EventHandlerTag[{
-             "MouseEntered" :> 
-              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
-              "MouseExited" :> 
-              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
-              Method -> "Preemptive", PassEventsDown -> Automatic, 
-              PassEventsUp -> True}]],
-           BaseStyle->"InformationTitleBackground",
-           StripOnInput->False], "\[SpanFromLeft]"}
-        },
-        AutoDelete->False,
-        FrameStyle->Directive[
-          LightDarkSwitched[
-           GrayLevel[0.8]], 
-          Thickness[Tiny]],
-        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
-        GridBoxDividers->{
-         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
-        GridBoxItemSize->{
-         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
-       "Grid"], False->
-      TagBox[GridBox[{
-         {
-          ItemBox[
-           PaneBox[
-            StyleBox[
-             TagBox[
-              TooltipBox[
-               StyleBox["\<\" Symbol\"\>", "InformationRowLabel",
-                StripOnInput->False],
-               "\"Symbol\"",
-               TooltipStyle->"TextStyling"],
-              Annotation[#, "Symbol", "Tooltip"]& ], "InformationTitleText",
-             StripOnInput->False],
-            FrameMargins->{{4, 0}, {-1, 1}}],
-           BaseStyle->"InformationTitleBackground",
-           StripOnInput->False], 
-          ItemBox["\<\"\"\>",
-           BaseStyle->"InformationTitleBackground",
-           StripOnInput->False]},
-         {
-          ItemBox[
-           PaneBox[
-            
-            StyleBox["\<\"PLYGaussianCount[filename] loads a 3D Gaussian \
-Splatting PLY file and returns the number of Gaussians it contains.\"\>", 
-             "InformationUsageText",
-             StripOnInput->False,
-             LineSpacing->{1.5, 1.5, 3.}],
-            FrameMargins->{{10, 10}, {8, 10}}],
-           BaseStyle->"InformationUsageSubtitleBackground",
-           StripOnInput->False], 
-          ItemBox["\<\"\"\>",
-           BaseStyle->"InformationUsageSubtitleBackground",
-           StripOnInput->False]},
-         {
-          ItemBox[
-           TagBox[
-            ButtonBox[
-             PaneSelectorBox[{False->
-              
-              DynamicBox[FEPrivate`FrontEndResource[
-               "FEBitmaps", "DownPointerOpener"],
-               ImageSizeCache->{10., {1.143798828125, 8.856201171875}}], True->
-              
-              
-              DynamicBox[FEPrivate`FrontEndResource[
-               "FEBitmaps", "DownPointerOpenerHot"],
-               ImageSizeCache->{10., {1.143798828125, 8.856201171875}}]}, 
-              Dynamic[System`InformationDump`mouseOver$$]],
-             Alignment->Left,
-             Appearance->{"Default" -> None},
-             
-             ButtonFunction:>FEPrivate`Set[
-              System`InformationDump`open$$, True],
-             Evaluator->Automatic,
-             FrameMargins->{{9, 0}, {0, 0}},
-             ImageMargins->0,
-             ImageSize->Full,
-             Method->"Preemptive"],
-            
-            EventHandlerTag[{
-             "MouseEntered" :> 
-              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
-              "MouseExited" :> 
-              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
-              Method -> "Preemptive", PassEventsDown -> Automatic, 
-              PassEventsUp -> True}]],
-           BaseStyle->"InformationTitleBackground",
-           StripOnInput->False], "\[SpanFromLeft]"}
-        },
-        AutoDelete->False,
-        FrameStyle->Directive[
-          LightDarkSwitched[
-           GrayLevel[0.8]], 
-          Thickness[Tiny]],
-        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
-        GridBoxDividers->{
-         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
-        GridBoxItemSize->{
-         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
-       "Grid"]}, Dynamic[System`InformationDump`open$$],
-      BaselinePosition->Baseline,
-      FrameMargins->0,
-      ImageSize->Automatic],
-     DynamicModuleValues:>{}],
-    BaseStyle->"InformationGridFrame",
-    StripOnInput->False], "InformationGridPlain",
-   StripOnInput->False],
-  InformationData[<|
-   "ObjectType" -> "Symbol", "Usage" -> 
-    "PLYGaussianCount[filename] loads a 3D Gaussian Splatting PLY file and \
-returns the number of Gaussians it contains.", "Documentation" -> None, 
-    "OwnValues" -> None, "UpValues" -> None, "DownValues" -> 
-    Information`InformationValueForm[
-     DownValues, ArnoudBuzing`GaussianSplatting`PLYGaussianCount, {
-      ArnoudBuzing`GaussianSplatting`PLYGaussianCount[
-         Pattern[ArnoudBuzing`GaussianSplatting`Private`filename, 
-          Blank[String]]] :> 
-       Module[{ArnoudBuzing`GaussianSplatting`Private`path, 
-          ArnoudBuzing`GaussianSplatting`Private`result}, 
-         ArnoudBuzing`GaussianSplatting`Private`loadLibrary[]; If[
-           Not[ArnoudBuzing`GaussianSplatting`Private`$libraryLoaded], 
-           Return[$Failed]]; 
-         ArnoudBuzing`GaussianSplatting`Private`path = 
-          ExpandFileName[ArnoudBuzing`GaussianSplatting`Private`filename]; 
-         If[
-           Not[
-            FileExistsQ[ArnoudBuzing`GaussianSplatting`Private`path]], Message[
-             MessageName[
-             ArnoudBuzing`GaussianSplatting`PLYGaussianCount, "badfile"], 
-             ArnoudBuzing`GaussianSplatting`Private`path]; Return[$Failed]]; 
-         ArnoudBuzing`GaussianSplatting`Private`result = Quiet[
-            Check[
-             ArnoudBuzing`GaussianSplatting`Private`$PLYGaussianCountFn[
-             ArnoudBuzing`GaussianSplatting`Private`path], $Failed, 
-             MessageName[LibraryFunction, "rterr"]], {
-             MessageName[LibraryFunction, "rterr"]}]; If[
-           Or[ArnoudBuzing`GaussianSplatting`Private`result === $Failed, 
-            And[
-             IntegerQ[ArnoudBuzing`GaussianSplatting`Private`result], 
-             ArnoudBuzing`GaussianSplatting`Private`result < 0]], Message[
-             MessageName[
-             ArnoudBuzing`GaussianSplatting`PLYGaussianCount, "err"], 
-             ArnoudBuzing`GaussianSplatting`Private`path]; $Failed, 
-           ArnoudBuzing`GaussianSplatting`Private`result]]}], "SubValues" -> 
-    None, "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
-    "Options" -> None, "Attributes" -> {}, "FullName" -> 
-    "ArnoudBuzing`GaussianSplatting`PLYGaussianCount"|>, False]]], "Output",
- CellChangeTimes->{3.9878536716471367`*^9},
- CellLabel->"Out[62]=",ExpressionUUID->"ece097d0-81af-4104-9e54-8892e564e2b5"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"PLYGaussianCount", 
-  "[", "\"\</Users/arnoudb/github/GaussianSplatting/tests/fixtures/small.ply\>\
-\"", "]"}]], "Input",
- CellChangeTimes->{{3.987853679803822*^9, 3.987853710355229*^9}},
- CellLabel->"In[63]:=",ExpressionUUID->"62931a6e-f53f-4251-a80f-4da606c3c222"],
-
-Cell[BoxData["5"], "Output",
- CellChangeTimes->{3.987853710615882*^9},
- CellLabel->"Out[63]=",ExpressionUUID->"c8a7e5de-3749-4f25-aba2-7f521917516c"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData["$CommandLine"], "Input",
- CellChangeTimes->{{3.98785438892913*^9, 3.987854390153234*^9}},
- CellLabel->"In[64]:=",ExpressionUUID->"b63a3465-2ca6-43f4-b37f-7fbdb8c1657c"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"\<\"/Applications/Wolfram/15.0/Wolfram.app/Contents/MacOS/\
-WolframKernel\"\>", ",", "\<\"-wstp\"\>", ",", "\<\"-linkprotocol\"\>", 
-   ",", "\<\"SharedMemory\"\>", ",", "\<\"-linkconnect\"\>", 
-   ",", "\<\"-linkname\"\>", ",", "\<\"43cqp_shm\"\>"}], "}"}]], "Output",
- CellChangeTimes->{3.98785439058883*^9},
- CellLabel->"Out[64]=",ExpressionUUID->"62511fb2-3f28-41f3-a895-0a8f7151cada"]
-}, Open  ]],
+  "]"}]], "Code",
+ CellChangeTimes->{{3.987856139353627*^9, 3.987856139353725*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"bd5a889c-6b2c-45a8-b90b-838945157fdf"],
 
 Cell[CellGroupData[{
 
@@ -3825,28 +3406,7 @@ Cell["x", "Subsubsection",
 
 Cell[BoxData["Quit"], "Input",
  CellChangeTimes->{{3.987856422473401*^9, 3.98785642288739*^9}},
- CellLabel->"In[7]:=",ExpressionUUID->"05907bcf-9568-4a90-8e6b-f2cbadd7fb24"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"PacletDirectoryLoad", 
-  "[", "\"\</Users/arnoudb/github/GaussianSplatting\>\"", "]"}]], "Input",
- CellLabel->"In[1]:=",ExpressionUUID->"eade51e2-199c-4e19-be64-dba4aea92136"],
-
-Cell[BoxData[
- RowBox[{"{", "\<\"/Users/arnoudb/github/GaussianSplatting\"\>", 
-  "}"}]], "Output",
- CellChangeTimes->{3.987856464113411*^9, 3.987856692957492*^9, 
-  3.987858000435863*^9, 3.9878581309607267`*^9},
- CellLabel->"Out[1]=",ExpressionUUID->"a57ee524-e142-4255-a54d-ba6f7ea397b1"]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{"Needs", "[", "\"\<ArnoudBuzing`GaussianSplatting`\>\"", 
-  "]"}]], "Input",
- CellChangeTimes->{{3.987856139353627*^9, 3.987856139353725*^9}},
- CellLabel->"In[2]:=",ExpressionUUID->"bd5a889c-6b2c-45a8-b90b-838945157fdf"],
+ CellLabel->"In[5]:=",ExpressionUUID->"05907bcf-9568-4a90-8e6b-f2cbadd7fb24"],
 
 Cell[BoxData[
  RowBox[{
@@ -3872,11 +3432,12 @@ Cell[BoxData[
  RowBox[{"file", 
   "=", "\"\</Users/arnoudb/Downloads/father-day.ply\>\""}]], "Input",
  CellChangeTimes->{{3.987857476869193*^9, 3.987857493540058*^9}},
- CellLabel->"In[25]:=",ExpressionUUID->"23d97f90-8d4c-4d6d-948c-ede58cff3a23"],
+ CellLabel->"In[3]:=",ExpressionUUID->"23d97f90-8d4c-4d6d-948c-ede58cff3a23"],
 
 Cell[BoxData["\<\"/Users/arnoudb/Downloads/father-day.ply\"\>"], "Output",
- CellChangeTimes->{3.98785749440469*^9, 3.987857527703841*^9},
- CellLabel->"Out[25]=",ExpressionUUID->"bd1ab9d9-323f-458a-95c6-8f912e209dc9"]
+ CellChangeTimes->{3.98785749440469*^9, 3.987857527703841*^9, 
+  3.987858532340045*^9},
+ CellLabel->"Out[3]=",ExpressionUUID->"1055b9e2-23b8-4762-8409-91dca7e21f70"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4176,11 +3737,80 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"file", 
   "=", "\"\</Users/arnoudb/Downloads/father-day.ply\>\""}]], "Input",
- CellLabel->"In[27]:=",ExpressionUUID->"1aa6eb66-4b5e-4791-ad6a-ad4416bb30bd"],
+ CellLabel->"In[3]:=",ExpressionUUID->"1aa6eb66-4b5e-4791-ad6a-ad4416bb30bd"],
 
 Cell[BoxData["\<\"/Users/arnoudb/Downloads/father-day.ply\"\>"], "Output",
- CellChangeTimes->{3.987857564578096*^9},
- CellLabel->"Out[27]=",ExpressionUUID->"665712d6-f8f9-4b4f-b0c0-aa5fa8a632aa"]
+ CellChangeTimes->{3.987857564578096*^9, 3.987858652625318*^9},
+ CellLabel->"Out[3]=",ExpressionUUID->"c32d0018-493a-40bc-88c4-618fd17dd3d1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"PLYGaussianRender", "[", 
+    RowBox[{"file", ",", 
+     RowBox[{"\"\<Position\>\"", "->", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0", ",", "1.5"}], "}"}]}], ",", 
+     RowBox[{"\"\<Pitch\>\"", "->", "pitch"}], ",", 
+     RowBox[{"\"\<FOV\>\"", "->", "fov"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"fov", ",", "2"}], "}"}], ",", "0.1", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"pitch", ",", 
+     RowBox[{
+      RowBox[{"-", "Pi"}], "/", "2"}], ",", 
+     RowBox[{"Pi", "/", "2"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.987858653864832*^9, 3.9878586548945837`*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"a8c8e187-3f97-4564-b1ac-c85fa6a553ff"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`fov$$ = 1.155, $CellContext`pitch$$ = 
+    0.30787608005179967`, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`fov$$], 2}, 0.1, 3, ControlType -> Manipulator}, {
+      Hold[$CellContext`pitch$$], Rational[-1, 2] Pi, Rational[1, 2] Pi, 
+      ControlType -> Manipulator}}, Typeset`size$$ = {
+    512., {253.134033203125, 258.865966796875}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`fov$$ = 2, $CellContext`pitch$$ = 
+        Rational[-1, 2] Pi}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      ArnoudBuzing`GaussianSplatting`PLYGaussianRender[$CellContext`file, 
+        "Position" -> {0, 0, 1.5}, "Pitch" -> $CellContext`pitch$$, 
+        "FOV" -> $CellContext`fov$$], 
+      "Specifications" :> {{{$CellContext`fov$$, 2}, 0.1, 
+         3}, {$CellContext`pitch$$, Rational[-1, 2] Pi, Rational[1, 2] Pi}}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      561.0999999999999, {315.6045497611165, 321.3364833548665}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.987858655254631*^9},
+ CellLabel->"Out[4]=",ExpressionUUID->"3e2c6209-98b3-4050-b839-2dd39ac7d420"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4209,13 +3839,13 @@ Cell[BoxData[
       RowBox[{"Pi", "/", "2"}]}], "}"}]}], "]"}]}]], "Input",
  CellChangeTimes->{{3.987856696873028*^9, 3.98785676897095*^9}, {
   3.987857588386879*^9, 3.9878576396279593`*^9}},
- CellLabel->"In[31]:=",ExpressionUUID->"dff45518-145f-469a-af98-7e7856bf7062"],
+ CellLabel->"In[4]:=",ExpressionUUID->"dff45518-145f-469a-af98-7e7856bf7062"],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`fov$$ = 2.92, $CellContext`pitch$$ = 
-    0.5466371217246242, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+   DynamicModuleBox[{$CellContext`fov$$ = 2, $CellContext`pitch$$ = 
+    0.9550441666912972, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`fov$$], 2}, 0.1, 3, ControlType -> Manipulator}, {
@@ -4255,8 +3885,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.987856707075508*^9, 3.9878567249848948`*^9}, {
    3.987856760977154*^9, 3.987856769195051*^9}, 3.987857534830016*^9, {
    3.987857590633417*^9, 3.987857596598547*^9}, {3.987857630031081*^9, 
-   3.987857640011834*^9}},
- CellLabel->"Out[31]=",ExpressionUUID->"e035d32d-f031-4d89-a8b4-6c4a6ed26524"]
+   3.987857640011834*^9}, 3.987858538091292*^9},
+ CellLabel->"Out[4]=",ExpressionUUID->"eac7112e-3a01-473c-859f-4b2e37cfcd6b"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -14841,6 +14471,144 @@ AAAAAAAAAAAAAACAO/kv2UMmcQ==
   PlotRange->{{0, 512.}, {0, 512.}}]], "Output",
  CellChangeTimes->{{3.987858026103951*^9, 3.9878580324885693`*^9}},
  CellLabel->"Out[6]=",ExpressionUUID->"f90f867b-933e-4808-8d38-c015fbb46699"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Interactive", " ", "exploration", " ", "of", " ", "the", " ", "rainbow", " ",
+     "cube"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+  "PLYGaussianExplore", 
+   "[", "\"\</Users/arnoudb/github/GaussianSplatting/tests/fixtures/rainbow.\
+ply\>\"", "]"}]}]], "Input",
+ CellChangeTimes->{{3.987858134266891*^9, 3.987858147439361*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"8c3160e0-e05a-42cb-9bee-ef123bc4159e"],
+
+Cell[BoxData[
+ DynamicModuleBox[{ArnoudBuzing`GaussianSplatting`Private`path$$ = 
+  "/Users/arnoudb/github/GaussianSplatting/tests/fixtures/rainbow.ply"}, 
+  TagBox[
+   StyleBox[
+    DynamicModuleBox[{ArnoudBuzing`GaussianSplatting`Private`mode$$ = "Splat",
+      ArnoudBuzing`GaussianSplatting`Private`phi$$ = -1.5330972149518187`, 
+     ArnoudBuzing`GaussianSplatting`Private`r$$ = 5.58, 
+     ArnoudBuzing`GaussianSplatting`Private`theta$$ = -0.27499999999999997`, 
+     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+        Hold[ArnoudBuzing`GaussianSplatting`Private`r$$], 3, "Distance"}, 0.1,
+        10, ControlType -> Manipulator}, {{
+        Hold[ArnoudBuzing`GaussianSplatting`Private`phi$$], 0, "Azimuth"}, -
+       Pi, Pi, ControlType -> Manipulator}, {{
+        Hold[ArnoudBuzing`GaussianSplatting`Private`theta$$], 0, 
+        "Elevation"}, -1.4707963267948965`, 1.4707963267948965`, ControlType -> 
+       Manipulator}, {{
+        Hold[ArnoudBuzing`GaussianSplatting`Private`mode$$], "Splat", 
+        "Mode"}, {"Splat", "Ellipse", "Point"}, ControlType -> SetterBar}}, 
+     Typeset`size$$ = {400., {197.134033203125, 202.865966796875}}, 
+     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+     Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+     DynamicBox[Manipulate`ManipulateBoxes[
+      1, StandardForm, 
+       "Variables" :> {
+        ArnoudBuzing`GaussianSplatting`Private`mode$$ = "Splat", 
+         ArnoudBuzing`GaussianSplatting`Private`phi$$ = 0, 
+         ArnoudBuzing`GaussianSplatting`Private`r$$ = 3, 
+         ArnoudBuzing`GaussianSplatting`Private`theta$$ = 0}, 
+       "ControllerVariables" :> {}, 
+       "OtherVariables" :> {
+        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+         Typeset`specs$$, Typeset`size$$, Typeset`update$$, 
+         Typeset`initDone$$, Typeset`skipInitDone$$, 
+         Typeset`keyframeActionsQ$$, Typeset`keyframeList$$}, "Body" :> 
+       ArnoudBuzing`GaussianSplatting`PLYGaussianRender[
+        ArnoudBuzing`GaussianSplatting`Private`path$$, 
+         "Position" -> {
+          ArnoudBuzing`GaussianSplatting`Private`r$$ 
+           Cos[ArnoudBuzing`GaussianSplatting`Private`phi$$] 
+           Cos[ArnoudBuzing`GaussianSplatting`Private`theta$$], 
+           ArnoudBuzing`GaussianSplatting`Private`r$$ 
+           Sin[ArnoudBuzing`GaussianSplatting`Private`theta$$], 
+           ArnoudBuzing`GaussianSplatting`Private`r$$ 
+           Sin[ArnoudBuzing`GaussianSplatting`Private`phi$$] 
+           Cos[ArnoudBuzing`GaussianSplatting`Private`theta$$]}, "Yaw" -> 
+         ArnoudBuzing`GaussianSplatting`Private`phi$$ + Pi/2, 
+         "Pitch" -> -ArnoudBuzing`GaussianSplatting`Private`theta$$, "Width" -> 
+         400, "Height" -> 400, "DisplayMode" -> 
+         ArnoudBuzing`GaussianSplatting`Private`mode$$], 
+       "Specifications" :> {{{
+          ArnoudBuzing`GaussianSplatting`Private`r$$, 3, "Distance"}, 0.1, 
+          10}, {{ArnoudBuzing`GaussianSplatting`Private`phi$$, 0, 
+           "Azimuth"}, -Pi, Pi}, {{
+          ArnoudBuzing`GaussianSplatting`Private`theta$$, 0, 
+           "Elevation"}, -1.4707963267948965`, 1.4707963267948965`}, {{
+          ArnoudBuzing`GaussianSplatting`Private`mode$$, "Splat", "Mode"}, {
+          "Splat", "Ellipse", "Point"}}}, 
+       "Options" :> {ControlPlacement -> Left}, "DefaultOptions" :> {}],
+      ImageSizeCache->{
+       706.39798828125, {227.90454976111653`, 233.63648335486653`}},
+      SingleEvaluation->True],
+     Deinitialization:>None,
+     DynamicModuleValues:>{},
+     SynchronousInitialization->True,
+     UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+     UnsavedVariables:>{Typeset`initDone$$},
+     UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+    Deployed->True,
+    StripOnInput->False],
+   Manipulate`InterpretManipulate[1]],
+  DynamicModuleValues:>{}]], "Output",
+ CellChangeTimes->{3.9878581486793756`*^9},
+ CellLabel->"Out[3]=",ExpressionUUID->"f6c9504e-fa8a-4a19-bf32-c4f430795259"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Interactive", " ", "exploration", " ", "of", " ", "the", " ", "seashell", 
+    " ", 
+    RowBox[{"(", 
+     RowBox[{"Point", " ", "mode", " ", "recommended"}], ")"}]}], "*)"}], 
+  "\n", 
+  RowBox[{
+   RowBox[{
+   "PLYGaussianExplore", "[", "\"\<tests/fixtures/seashell.ply\>\"", "]"}], 
+   "\n"}]}]], "Input",
+ CellChangeTimes->{{3.987858134266891*^9, 
+  3.987858138944765*^9}},ExpressionUUID->"ca36d52a-16e5-40b5-8617-\
+3c715c023e0e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["x", "Subsubsection",
+ CellChangeTimes->{
+  3.9878640241548157`*^9},ExpressionUUID->"1502c54d-8633-4d5e-a274-\
+adb87cfaf781"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Render", " ", "an", " ", "SPZ", " ", "file"}], "*)"}], 
+  RowBox[{
+   RowBox[{"img", "=", 
+    RowBox[{"SPZGaussianRender", "[", 
+     RowBox[{"\"\<model.spz\>\"", ",", 
+      RowBox[{"\"\<DisplayMode\>\"", "->", "\"\<Splat\>\""}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Explore", " ", "it", " ", "interactively"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"PLYGaussianExplore", "[", "\"\<model.spz\>\"", "]"}], 
+   "\n"}]}]], "Input",
+ CellChangeTimes->{{3.987864025669182*^9, 
+  3.9878640256693783`*^9}},ExpressionUUID->"5ded812a-f3da-4d6d-8f13-\
+0314f23cf190"]
 }, Open  ]]
 }, Open  ]]
 },
@@ -14862,117 +14630,113 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[576, 22, 181, 2, 29, "Input",ExpressionUUID->"7e0976d4-7055-48bb-9291-574bee90732f"],
-Cell[760, 26, 205, 3, 33, "Output",ExpressionUUID->"7d1e812b-cd4e-4315-8300-3520f3719f04"]
+Cell[576, 22, 161, 3, 96, "Title",ExpressionUUID->"0a0e4a5a-49db-4c85-8a4e-1e58e1d2e19c"],
+Cell[740, 27, 175, 2, 29, "Input",ExpressionUUID->"0e906943-4bbc-4daa-9c79-0dfd80db308d"],
+Cell[CellGroupData[{
+Cell[940, 33, 247, 8, 51, "Code",ExpressionUUID->"eade51e2-199c-4e19-be64-dba4aea92136"],
+Cell[1190, 43, 337, 6, 33, "Output",ExpressionUUID->"2d2d83e6-6c5b-4ad4-8084-577d9bce8485"]
+}, Open  ]],
+Cell[1542, 52, 242, 4, 51, "Code",ExpressionUUID->"bd5a889c-6b2c-45a8-b90b-838945157fdf"],
+Cell[CellGroupData[{
+Cell[1809, 60, 128, 3, 43, "Subsubsection",ExpressionUUID->"e740109c-f8ce-4624-9e7c-3d605b861030"],
+Cell[1940, 65, 173, 2, 29, "Input",ExpressionUUID->"c7e3d0af-58b3-4400-bf50-bdd0af0751fb"],
+Cell[CellGroupData[{
+Cell[2138, 71, 199, 3, 29, "Input",ExpressionUUID->"e9d343fb-06e5-40b5-b2df-5c89c3d63bcb"],
+Cell[2340, 76, 265, 5, 33, "Output",ExpressionUUID->"f699411c-cb54-4cc0-8406-774afbbb6215"]
+}, Open  ]],
+Cell[2620, 84, 398, 9, 49, "Input",ExpressionUUID->"651d46b6-8018-4df6-83f3-6b7c61da7bc6"],
+Cell[3021, 95, 490, 13, 49, "Input",ExpressionUUID->"ef73bfae-f644-4a46-b464-6601799a1514"],
+Cell[3514, 110, 549, 13, 49, "Input",ExpressionUUID->"f59b96e6-8c79-47a1-97cc-f603848c4313"],
+Cell[4066, 125, 524, 13, 49, "Input",ExpressionUUID->"282b088e-71d6-40d5-8569-b72943e20237"],
+Cell[CellGroupData[{
+Cell[4615, 142, 270, 5, 29, "Input",ExpressionUUID->"81f97bde-2b26-46b2-8d6a-c2d08172e35b"],
+Cell[4888, 149, 418, 10, 23, "Print",ExpressionUUID->"14153da6-94b4-4dc9-a326-7f7fc0da0a28"]
+}, Open  ]],
+Cell[5321, 162, 271, 5, 29, "Input",ExpressionUUID->"ac4ff3fb-1ae4-4ff9-bf81-a0f4fcfc1851"],
+Cell[CellGroupData[{
+Cell[5617, 171, 321, 6, 29, "Input",ExpressionUUID->"63354a44-c6ab-4243-a3da-526ca36aa3fc"],
+Cell[5941, 179, 481, 12, 23, "Print",ExpressionUUID->"20751939-6cf2-4efb-a391-e386816f419d"]
+}, Open  ]],
+Cell[6437, 194, 265, 5, 29, "Input",ExpressionUUID->"de35cc0a-13ce-4ee6-aa4d-10da9bad0371"],
+Cell[CellGroupData[{
+Cell[6727, 203, 315, 6, 29, "Input",ExpressionUUID->"87055ff6-e217-4727-b076-3a43ab5ee650"],
+Cell[7045, 211, 475, 12, 23, "Print",ExpressionUUID->"9209895c-8d5b-420e-93bc-955b662b7a0d"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1002, 34, 266, 4, 29, "Input",ExpressionUUID->"8456c7c4-8828-400b-88f0-ac456a0e57f5"],
-Cell[1271, 40, 293, 6, 33, "Output",ExpressionUUID->"e1f34b0c-048a-4b4f-a62d-76843126fbe0"]
-}, Open  ]],
-Cell[1579, 49, 245, 4, 29, "Input",ExpressionUUID->"836c06f5-ef40-4a57-86d1-ed4d28216512"],
-Cell[CellGroupData[{
-Cell[1849, 57, 222, 3, 29, "Input",ExpressionUUID->"6a57de5b-3701-40d1-b197-83d258dbc2aa"],
-Cell[2074, 62, 16038, 382, 89, "Output",ExpressionUUID->"ece097d0-81af-4104-9e54-8892e564e2b5"]
+Cell[7557, 228, 733, 17, 70, "Input",ExpressionUUID->"ddda7875-46c8-44c1-b72b-9cd7ffa4cae9"],
+Cell[8293, 247, 15184, 256, 391, "Output",ExpressionUUID->"7508fa42-e4b7-4966-86ae-852cd69ae9b1"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[18149, 449, 290, 5, 29, "Input",ExpressionUUID->"62931a6e-f53f-4251-a80f-4da606c3c222"],
-Cell[18442, 456, 149, 2, 33, "Output",ExpressionUUID->"c8a7e5de-3749-4f25-aba2-7f521917516c"]
+Cell[23514, 508, 666, 16, 70, "Input",ExpressionUUID->"7977a1cf-270f-4117-8405-1ac6bfc8e608"],
+Cell[24183, 526, 173515, 2853, 428, 8056, 139, "CachedBoxData", "BoxData", "Output",ExpressionUUID->"c48c2b00-818c-41ee-9252-0656c30cc726"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[18628, 463, 182, 2, 29, "Input",ExpressionUUID->"b63a3465-2ca6-43f4-b37f-7fbdb8c1657c"],
-Cell[18813, 467, 429, 7, 33, "Output",ExpressionUUID->"62511fb2-3f28-41f3-a895-0a8f7151cada"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[19279, 479, 128, 3, 43, "Subsubsection",ExpressionUUID->"e740109c-f8ce-4624-9e7c-3d605b861030"],
-Cell[19410, 484, 173, 2, 29, "Input",ExpressionUUID->"c7e3d0af-58b3-4400-bf50-bdd0af0751fb"],
-Cell[CellGroupData[{
-Cell[19608, 490, 199, 3, 29, "Input",ExpressionUUID->"e9d343fb-06e5-40b5-b2df-5c89c3d63bcb"],
-Cell[19810, 495, 265, 5, 33, "Output",ExpressionUUID->"f699411c-cb54-4cc0-8406-774afbbb6215"]
-}, Open  ]],
-Cell[20090, 503, 398, 9, 49, "Input",ExpressionUUID->"651d46b6-8018-4df6-83f3-6b7c61da7bc6"],
-Cell[20491, 514, 490, 13, 49, "Input",ExpressionUUID->"ef73bfae-f644-4a46-b464-6601799a1514"],
-Cell[20984, 529, 549, 13, 49, "Input",ExpressionUUID->"f59b96e6-8c79-47a1-97cc-f603848c4313"],
-Cell[21536, 544, 524, 13, 49, "Input",ExpressionUUID->"282b088e-71d6-40d5-8569-b72943e20237"],
-Cell[CellGroupData[{
-Cell[22085, 561, 270, 5, 29, "Input",ExpressionUUID->"81f97bde-2b26-46b2-8d6a-c2d08172e35b"],
-Cell[22358, 568, 418, 10, 23, "Print",ExpressionUUID->"14153da6-94b4-4dc9-a326-7f7fc0da0a28"]
-}, Open  ]],
-Cell[22791, 581, 271, 5, 29, "Input",ExpressionUUID->"ac4ff3fb-1ae4-4ff9-bf81-a0f4fcfc1851"],
-Cell[CellGroupData[{
-Cell[23087, 590, 321, 6, 29, "Input",ExpressionUUID->"63354a44-c6ab-4243-a3da-526ca36aa3fc"],
-Cell[23411, 598, 481, 12, 23, "Print",ExpressionUUID->"20751939-6cf2-4efb-a391-e386816f419d"]
-}, Open  ]],
-Cell[23907, 613, 265, 5, 29, "Input",ExpressionUUID->"de35cc0a-13ce-4ee6-aa4d-10da9bad0371"],
-Cell[CellGroupData[{
-Cell[24197, 622, 315, 6, 29, "Input",ExpressionUUID->"87055ff6-e217-4727-b076-3a43ab5ee650"],
-Cell[24515, 630, 475, 12, 23, "Print",ExpressionUUID->"9209895c-8d5b-420e-93bc-955b662b7a0d"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[25027, 647, 733, 17, 70, "Input",ExpressionUUID->"ddda7875-46c8-44c1-b72b-9cd7ffa4cae9"],
-Cell[25763, 666, 15184, 256, 391, "Output",ExpressionUUID->"7508fa42-e4b7-4966-86ae-852cd69ae9b1"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[40984, 927, 666, 16, 70, "Input",ExpressionUUID->"7977a1cf-270f-4117-8405-1ac6bfc8e608"],
-Cell[41653, 945, 173515, 2853, 428, 8056, 139, "CachedBoxData", "BoxData", "Output",ExpressionUUID->"c48c2b00-818c-41ee-9252-0656c30cc726"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[215205, 3803, 246, 4, 29, "Input",ExpressionUUID->"2297cc2f-715c-4457-82b4-9ce4a14424e0"],
-Cell[215454, 3809, 267, 5, 33, "Output",ExpressionUUID->"a158886b-ba42-4466-b385-d333c7e63170"]
+Cell[197735, 3384, 246, 4, 29, "Input",ExpressionUUID->"2297cc2f-715c-4457-82b4-9ce4a14424e0"],
+Cell[197984, 3390, 267, 5, 33, "Output",ExpressionUUID->"a158886b-ba42-4466-b385-d333c7e63170"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[215770, 3820, 128, 3, 43, "Subsubsection",ExpressionUUID->"eead0ff9-7741-4b3e-b653-0210d7d1c38f"],
-Cell[215901, 3825, 173, 2, 29, "Input",ExpressionUUID->"05907bcf-9568-4a90-8e6b-f2cbadd7fb24"],
+Cell[198300, 3401, 128, 3, 43, "Subsubsection",ExpressionUUID->"eead0ff9-7741-4b3e-b653-0210d7d1c38f"],
+Cell[198431, 3406, 173, 2, 29, "Input",ExpressionUUID->"05907bcf-9568-4a90-8e6b-f2cbadd7fb24"],
+Cell[198607, 3410, 305, 7, 29, "Input",ExpressionUUID->"f9051d99-2654-4012-a0c0-b5a50a9e802c"],
+Cell[198915, 3419, 272, 7, 29, "Input",ExpressionUUID->"a78e5567-116a-440d-ac48-c889e7e2941e"],
 Cell[CellGroupData[{
-Cell[216099, 3831, 199, 3, 29, "Input",ExpressionUUID->"eade51e2-199c-4e19-be64-dba4aea92136"],
-Cell[216301, 3836, 290, 5, 33, "Output",ExpressionUUID->"a57ee524-e142-4255-a54d-ba6f7ea397b1"]
-}, Open  ]],
-Cell[216606, 3844, 243, 4, 29, "Input",ExpressionUUID->"bd5a889c-6b2c-45a8-b90b-838945157fdf"],
-Cell[216852, 3850, 305, 7, 29, "Input",ExpressionUUID->"f9051d99-2654-4012-a0c0-b5a50a9e802c"],
-Cell[217160, 3859, 272, 7, 29, "Input",ExpressionUUID->"a78e5567-116a-440d-ac48-c889e7e2941e"],
-Cell[CellGroupData[{
-Cell[217457, 3870, 246, 4, 29, "Input",ExpressionUUID->"23d97f90-8d4c-4d6d-948c-ede58cff3a23"],
-Cell[217706, 3876, 216, 2, 33, "Output",ExpressionUUID->"bd1ab9d9-323f-458a-95c6-8f912e209dc9"]
+Cell[199212, 3430, 245, 4, 29, "Input",ExpressionUUID->"23d97f90-8d4c-4d6d-948c-ede58cff3a23"],
+Cell[199460, 3436, 240, 3, 33, "Output",ExpressionUUID->"1055b9e2-23b8-4762-8409-91dca7e21f70"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[217959, 3883, 636, 13, 49, "Input",ExpressionUUID->"026f55f6-24c3-406a-b683-3690ac070d83"],
-Cell[218598, 3898, 474, 7, 33, "Output",ExpressionUUID->"ce20dec3-ba3e-4eba-8542-a5789365a781"]
+Cell[199737, 3444, 636, 13, 49, "Input",ExpressionUUID->"026f55f6-24c3-406a-b683-3690ac070d83"],
+Cell[200376, 3459, 474, 7, 33, "Output",ExpressionUUID->"ce20dec3-ba3e-4eba-8542-a5789365a781"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[219109, 3910, 410, 10, 29, "Input",ExpressionUUID->"f1b124e9-d532-4e21-b651-f5db72d9a9de"],
-Cell[219522, 3922, 1991, 36, 529, "Output",ExpressionUUID->"7c7a4793-81c1-44f8-a771-d34c7ca72da2"]
+Cell[200887, 3471, 410, 10, 29, "Input",ExpressionUUID->"f1b124e9-d532-4e21-b651-f5db72d9a9de"],
+Cell[201300, 3483, 1991, 36, 529, "Output",ExpressionUUID->"7c7a4793-81c1-44f8-a771-d34c7ca72da2"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[221550, 3963, 436, 10, 29, "Input",ExpressionUUID->"8d328504-9b75-4e96-b52b-f308ef29771f"],
-Cell[221989, 3975, 3524, 62, 529, "Output",ExpressionUUID->"ad4b9f97-6c5f-440a-83e5-26920efc4ef5"]
+Cell[203328, 3524, 436, 10, 29, "Input",ExpressionUUID->"8d328504-9b75-4e96-b52b-f308ef29771f"],
+Cell[203767, 3536, 3524, 62, 529, "Output",ExpressionUUID->"ad4b9f97-6c5f-440a-83e5-26920efc4ef5"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[225550, 4042, 434, 10, 29, "Input",ExpressionUUID->"52cfb2dd-63e6-4032-828f-8caa0e1c4b25"],
-Cell[225987, 4054, 3414, 60, 529, "Output",ExpressionUUID->"3fed5125-f808-4ec6-b828-9f3a9b449268"]
+Cell[207328, 3603, 434, 10, 29, "Input",ExpressionUUID->"52cfb2dd-63e6-4032-828f-8caa0e1c4b25"],
+Cell[207765, 3615, 3414, 60, 529, "Output",ExpressionUUID->"3fed5125-f808-4ec6-b828-9f3a9b449268"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[229438, 4119, 832, 21, 70, "Input",ExpressionUUID->"eccdef40-e5f2-4f0e-bc82-e43ca73096fa"],
-Cell[230273, 4142, 345, 7, 33, "Output",ExpressionUUID->"9b44d605-3b0e-43a4-a6f2-efb76ae28bd5"]
+Cell[211216, 3680, 832, 21, 70, "Input",ExpressionUUID->"eccdef40-e5f2-4f0e-bc82-e43ca73096fa"],
+Cell[212051, 3703, 345, 7, 33, "Output",ExpressionUUID->"9b44d605-3b0e-43a4-a6f2-efb76ae28bd5"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[230655, 4154, 346, 8, 29, "Input",ExpressionUUID->"257f7fb1-5262-4692-b81a-f0c95e0a0530"],
-Cell[231004, 4164, 273, 6, 33, "Output",ExpressionUUID->"cdff329d-0ccb-4fc9-a6bc-2e450514142d"]
+Cell[212433, 3715, 346, 8, 29, "Input",ExpressionUUID->"257f7fb1-5262-4692-b81a-f0c95e0a0530"],
+Cell[212782, 3725, 273, 6, 33, "Output",ExpressionUUID->"cdff329d-0ccb-4fc9-a6bc-2e450514142d"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[231314, 4175, 180, 3, 29, "Input",ExpressionUUID->"1aa6eb66-4b5e-4791-ad6a-ad4416bb30bd"],
-Cell[231497, 4180, 195, 2, 33, "Output",ExpressionUUID->"665712d6-f8f9-4b4f-b0c0-aa5fa8a632aa"]
+Cell[213092, 3736, 179, 3, 29, "Input",ExpressionUUID->"1aa6eb66-4b5e-4791-ad6a-ad4416bb30bd"],
+Cell[213274, 3741, 216, 2, 33, "Output",ExpressionUUID->"c32d0018-493a-40bc-88c4-618fd17dd3d1"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[231729, 4187, 939, 24, 49, "Input",ExpressionUUID->"dff45518-145f-469a-af98-7e7856bf7062"],
-Cell[232671, 4213, 2433, 45, 653, "Output",ExpressionUUID->"e035d32d-f031-4d89-a8b4-6c4a6ed26524"]
+Cell[213527, 3748, 781, 20, 29, "Input",ExpressionUUID->"a8c8e187-3f97-4564-b1ac-c85fa6a553ff"],
+Cell[214311, 3770, 2237, 42, 653, "Output",ExpressionUUID->"3e2c6209-98b3-4050-b839-2dd39ac7d420"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[235141, 4263, 633, 13, 49, "Input",ExpressionUUID->"22765134-03c0-48d6-9406-f0a7b1fc3293"],
-Cell[235777, 4278, 638134, 10465, 529, "Output",ExpressionUUID->"f1213a24-9b5e-4170-ad3c-7362bf4a794f"]
+Cell[216585, 3817, 938, 24, 49, "Input",ExpressionUUID->"dff45518-145f-469a-af98-7e7856bf7062"],
+Cell[217526, 3843, 2451, 45, 653, "Output",ExpressionUUID->"eac7112e-3a01-473c-859f-4b2e37cfcd6b"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[873948, 14748, 655, 16, 70, "Input",ExpressionUUID->"3d77be79-8dd4-40b6-a6f9-e3a4b621a46e"],
-Cell[874606, 14766, 4427, 76, 529, "Output",ExpressionUUID->"f90f867b-933e-4808-8d38-c015fbb46699"]
+Cell[220014, 3893, 633, 13, 49, "Input",ExpressionUUID->"22765134-03c0-48d6-9406-f0a7b1fc3293"],
+Cell[220650, 3908, 638134, 10465, 529, "Output",ExpressionUUID->"f1213a24-9b5e-4170-ad3c-7362bf4a794f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[858821, 14378, 655, 16, 70, "Input",ExpressionUUID->"3d77be79-8dd4-40b6-a6f9-e3a4b621a46e"],
+Cell[859479, 14396, 4427, 76, 529, "Output",ExpressionUUID->"f90f867b-933e-4808-8d38-c015fbb46699"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[863943, 14477, 468, 11, 49, "Input",ExpressionUUID->"8c3160e0-e05a-42cb-9bee-ef123bc4159e"],
+Cell[864414, 14490, 4243, 76, 478, "Output",ExpressionUUID->"f6c9504e-fa8a-4a19-bf32-c4f430795259"]
+}, Open  ]],
+Cell[868672, 14569, 492, 15, 70, "Input",ExpressionUUID->"ca36d52a-16e5-40b5-8617-3c715c023e0e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[869201, 14589, 130, 3, 43, "Subsubsection",ExpressionUUID->"1502c54d-8633-4d5e-a274-adb87cfaf781"],
+Cell[869334, 14594, 655, 16, 111, "Input",ExpressionUUID->"5ded812a-f3da-4d6d-8f13-0314f23cf190"]
 }, Open  ]]
 }, Open  ]]
 }

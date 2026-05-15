@@ -202,7 +202,7 @@ pub fn wl_ply_gaussian_opacities(path: String) -> NumericArray<f32> {
 #[export]
 pub fn wl_ply_gaussian_render(path: String, width: i64, height: i64, px: f64, py: f64, pz: f64, pitch: f64, yaw: f64, fov: f64, display_mode: i64) -> NumericArray<u8> {
     let params = [px as f32, py as f32, pz as f32, pitch as f32, yaw as f32, fov as f32];
-    if let Some(arr) = render::render_ply_to_image(&path, width as u32, height as u32, &params, display_mode as u8) {
+    if let Some(arr) = render::render_gaussian_to_image(&path, width as u32, height as u32, &params, display_mode as u8) {
         arr
     } else {
         NumericArray::<u8>::from_slice(&[])

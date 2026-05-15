@@ -25,6 +25,7 @@ PacletObject[
           "ArnoudBuzing`GaussianSplatting`PLYGaussianGraphics",
           "ArnoudBuzing`GaussianSplatting`PLYGaussianImage",
           "ArnoudBuzing`GaussianSplatting`PLYGaussianRender",
+          "ArnoudBuzing`GaussianSplatting`SPZGaussianRender",
           "ArnoudBuzing`GaussianSplatting`PLYGaussianExplore"
         }
       },

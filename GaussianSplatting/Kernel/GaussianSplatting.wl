@@ -16,6 +16,7 @@ PLYGaussianRotations::usage = "PLYGaussianRotations[filename] returns an N x 4 N
 PLYGaussianGraphics::usage = "PLYGaussianGraphics[filename] returns a Graphics3D Point primitive representation of the Gaussian splats.";
 PLYGaussianImage::usage = "PLYGaussianImage[filename, res:32] returns an Image3D voxel representation of the Gaussian splats using a grid of size res.";
 PLYGaussianRender::usage = "PLYGaussianRender[filename, opts] returns an Image representation of the Gaussian splats rendered via WGPU.";
+SPZGaussianRender::usage = "SPZGaussianRender[filename, opts] returns an Image representation of the Gaussian splats rendered via WGPU.";
 PLYGaussianExplore::usage = "PLYGaussianExplore[filename] opens an interactive interface to explore the Gaussian splat model.";
 
 Options[PLYGaussianRender] = {
@@ -254,6 +255,8 @@ PLYGaussianRender[filename_String, opts:OptionsPattern[]] := Module[
   data = ArrayReshape[Normal[result], {height, width, 4}];
   Image[data, "Byte", ColorSpace -> "RGB"]
 ]
+
+SPZGaussianRender[args___] := PLYGaussianRender[args]
 
 PLYGaussianExplore[filename_String] := DynamicModule[
   {path = ExpandFileName[filename]},
